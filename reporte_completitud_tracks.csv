@@ -1,0 +1,11 @@
+track_id,estado,frames_activos,primer_frame,ultimo_frame,longitud_total_px,longitud_promedio_px,ancho_promedio_px,ancho_maximo_px,toca_borde_superior,toca_borde_inferior
+2,COMPLETA,1,0,0,0,0,0,0,False,False
+1,TRUNCADA_INICIO,2,0,1,0,0,0,0,True,False
+4,TRUNCADA_INICIO,1,1,1,0,0,0,0,True,False
+3,COMPLETA,1,1,1,0,0,0,0,False,False
+5,COMPLETA,15,4,23,0,0,0,0,False,True
+11,COMPLETA,4,12,15,0,0,0,0,False,False
+14,TRUNCADA_INICIO,3,14,23,0,0,0,0,True,True
+15,TRUNCADA_INICIO,3,16,18,0,0,0,0,True,False
+18,COMPLETA,3,18,20,0,0,0,0,False,False
+10,TRUNCADA_INICIO,1,19,19,0,0,0,0,True,False

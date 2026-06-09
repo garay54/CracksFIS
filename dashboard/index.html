@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FIS Grietas | Dashboard interactivo</title>
+  <link rel="stylesheet" href="./styles.css?v=20260609-editor4">
+</head>
+<body>
+  <header class="app-header">
+    <div>
+      <p class="eyebrow">Sistema Mamdani jerarquico</p>
+      <h1>Evaluacion difusa de grietas</h1>
+    </div>
+    <div class="status-strip" aria-live="polite">
+      <span id="statusLabel" class="status-pill status-low">LEVE</span>
+      <span id="statusScore">SF 0.0%</span>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <section class="control-panel" aria-labelledby="inputs-title">
+      <div class="section-title">
+        <h2 id="inputs-title">Entradas</h2>
+        <p>Los valores se evaluan inmediatamente en los tres sub-FIS.</p>
+      </div>
+
+      <div class="input-grid">
+        <label class="control-row" for="wInput">
+          <span>
+            <strong>W</strong>
+            <small>Anchura media, mm</small>
+          </span>
+          <input id="wInput" type="range" min="0" max="30" step="0.1" value="6">
+          <output id="wValue">6.0</output>
+        </label>
+
+        <label class="control-row" for="lInput">
+          <span>
+            <strong>L</strong>
+            <small>Longitud del track, mm</small>
+          </span>
+          <input id="lInput" type="range" min="0" max="2000" step="10" value="800">
+          <output id="lValue">800</output>
+        </label>
+
+        <label class="control-row" for="dInput">
+          <span>
+            <strong>D</strong>
+            <small>Densidad de mascara</small>
+          </span>
+          <input id="dInput" type="range" min="0" max="1" step="0.005" value="0.30">
+          <output id="dValue">0.300</output>
+        </label>
+
+        <label class="control-row" for="cInput">
+          <span>
+            <strong>C</strong>
+            <small>Completitud observada</small>
+          </span>
+          <input id="cInput" type="range" min="0" max="1" step="0.01" value="0.8">
+          <output id="cValue">0.80</output>
+        </label>
+      </div>
+
+      <div class="preset-row" aria-label="Casos de prueba">
+        <button type="button" data-preset="light">Caso leve</button>
+        <button type="button" data-preset="medium">Caso moderado</button>
+        <button type="button" data-preset="critical">Caso critico</button>
+        <button type="button" data-preset="truncated">Truncado</button>
+      </div>
+    </section>
+
+    <section class="result-panel" aria-labelledby="outputs-title">
+      <div class="section-title">
+        <h2 id="outputs-title">Salidas</h2>
+        <p>Resultados defuzzificados por centroide.</p>
+      </div>
+      <div class="metric-grid">
+        <div class="metric">
+          <span>SD</span>
+          <strong id="sdMetric">0.0%</strong>
+          <small>Severidad dimensional</small>
+        </div>
+        <div class="metric">
+          <span>SE</span>
+          <strong id="seMetric">0.0%</strong>
+          <small>Severidad de extension</small>
+        </div>
+        <div class="metric final">
+          <span>SF</span>
+          <strong id="sfMetric">0.0%</strong>
+          <small>Severidad final</small>
+        </div>
+      </div>
+      <div class="recommendation">
+        <span>Recomendacion metodologica</span>
+        <p id="recommendationText">Monitoreo periodico.</p>
+      </div>
+      <p class="method-note">Los umbrales de recomendacion son internos y preliminares; no representan dictamen oficial de mantenimiento.</p>
+    </section>
+
+    <section class="tabs-panel">
+      <nav class="tabs" aria-label="Vistas del sistema">
+        <button class="tab-button active" type="button" data-tab="rules">Reglas activadas</button>
+        <button class="tab-button" type="button" data-tab="surfaces">Superficies</button>
+        <button class="tab-button" type="button" data-tab="membership">Membresias</button>
+        <button class="tab-button" type="button" data-tab="mfeditor">Editor FIS</button>
+        <button class="tab-button" type="button" data-tab="components">Componentes</button>
+        <button class="tab-button" type="button" data-tab="configuration">Configuracion FIS</button>
+      </nav>
+
+      <div class="tab-page active" id="rules" role="tabpanel">
+        <div class="section-title">
+          <h2>Reglas activadas</h2>
+          <p>La intensidad corresponde al grado de disparo minimo de cada antecedente.</p>
+        </div>
+        <div class="rule-layout">
+          <article class="rule-block">
+            <h3>FIS 1: W, L -> SD</h3>
+            <div id="fis1Rules" class="rule-table"></div>
+          </article>
+          <article class="rule-block">
+            <h3>FIS 2: D, C -> SE</h3>
+            <div id="fis2Rules" class="rule-table"></div>
+          </article>
+          <article class="rule-block">
+            <h3>FIS 3: SD, SE -> SF</h3>
+            <div id="fis3Rules" class="rule-table"></div>
+          </article>
+        </div>
+      </div>
+
+      <div class="tab-page" id="surfaces" role="tabpanel">
+        <div class="section-title">
+          <h2>Superficies de respuesta 3D</h2>
+          <p>Superficies calculadas con el mismo motor difuso del dashboard. Arrastra cada grafica para rotarla.</p>
+        </div>
+        <div class="surface-tools" aria-label="Controles de superficie">
+          <button type="button" id="resetViewButton">Restablecer vista 3D</button>
+          <span>Marcador blanco: caso evaluado actualmente.</span>
+        </div>
+        <div class="surface-grid surface-grid-3d">
+          <figure class="surface-card">
+            <canvas id="surfaceWL" width="560" height="390" data-surface="surfaceWL"></canvas>
+            <figcaption>W, L -> SD</figcaption>
+          </figure>
+          <figure class="surface-card">
+            <canvas id="surfaceDC" width="560" height="390" data-surface="surfaceDC"></canvas>
+            <figcaption>D, C -> SE</figcaption>
+          </figure>
+          <figure class="surface-card">
+            <canvas id="surfaceFinal" width="560" height="390" data-surface="surfaceFinal"></canvas>
+            <figcaption>SD, SE -> SF</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="tab-page" id="membership" role="tabpanel">
+        <div class="section-title">
+          <h2>Funciones de membresia</h2>
+          <p>Parametros actuales del FIS. Puedes ajustar las membresias y ver su efecto inmediato en las superficies.</p>
+        </div>
+        <section class="membership-editor" aria-labelledby="membership-editor-title">
+          <div class="editor-header">
+            <div>
+              <h3 id="membership-editor-title">Editor manual</h3>
+              <p>Modifica forma y puntos de control. Cambiar a gaussiana permite probar transiciones con mayor curvatura.</p>
+            </div>
+            <div class="editor-actions">
+              <label for="membershipVariableSelect">
+                <span>Variable</span>
+                <select id="membershipVariableSelect"></select>
+              </label>
+              <button type="button" id="resetVariableButton">Restaurar variable</button>
+              <button type="button" id="resetAllMembershipsButton">Restaurar todo</button>
+            </div>
+          </div>
+          <div id="membershipSetControls" class="membership-set-controls"></div>
+        </section>
+        <div class="chart-grid">
+          <figure><canvas id="chartW" width="420" height="240"></canvas><figcaption>Entrada W</figcaption></figure>
+          <figure><canvas id="chartL" width="420" height="240"></canvas><figcaption>Entrada L</figcaption></figure>
+          <figure><canvas id="chartD" width="420" height="240"></canvas><figcaption>Entrada D</figcaption></figure>
+          <figure><canvas id="chartC" width="420" height="240"></canvas><figcaption>Entrada C</figcaption></figure>
+          <figure><canvas id="chartSD" width="420" height="240"></canvas><figcaption>Salida SD</figcaption></figure>
+          <figure><canvas id="chartSE" width="420" height="240"></canvas><figcaption>Salida SE</figcaption></figure>
+          <figure><canvas id="chartSF" width="420" height="240"></canvas><figcaption>Salida SF</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="tab-page" id="mfeditor" role="tabpanel">
+        <div class="section-title">
+          <h2>Editor grafico de membresias</h2>
+          <p>Selecciona una variable y arrastra los puntos de control para modificar sus parametros y observar la respuesta del sistema.</p>
+        </div>
+        <div class="fis-editor-layout">
+          <aside class="fis-editor-sidebar" aria-label="Variables del sistema">
+            <section>
+              <h3>Entradas</h3>
+              <div id="editorInputVariables" class="editor-variable-list"></div>
+            </section>
+            <section>
+              <h3>Salidas</h3>
+              <div id="editorOutputVariables" class="editor-variable-list"></div>
+            </section>
+          </aside>
+
+          <section class="fis-editor-main">
+            <div class="fis-editor-toolbar">
+              <div>
+                <h3 id="mfEditorVariableTitle">Variable</h3>
+                <p id="mfEditorVariableMeta">Rango y funciones actuales.</p>
+              </div>
+              <div class="editor-actions">
+                <button type="button" id="resetEditorVariableButton">Restaurar variable</button>
+                <button type="button" id="resetEditorAllButton">Restaurar todo</button>
+              </div>
+            </div>
+            <canvas id="mfEditorCanvas" class="mf-editor-canvas" width="760" height="380"></canvas>
+            <div id="mfEditorParameterPanel" class="mf-editor-params"></div>
+
+            <div class="surface-tools editor-surface-tools" aria-label="Controles de superficie del editor">
+              <button type="button" id="resetEditorViewButton">Restablecer vista 3D</button>
+              <span>Las superficies se recalculan con cada ajuste de membresia.</span>
+            </div>
+            <div class="surface-grid editor-surface-grid">
+              <figure class="surface-card compact-surface">
+                <canvas id="editorSurfaceWL" width="420" height="292" data-surface="editorSurfaceWL" data-surface-key="surfaceWL"></canvas>
+                <figcaption>W, L -> SD</figcaption>
+              </figure>
+              <figure class="surface-card compact-surface">
+                <canvas id="editorSurfaceDC" width="420" height="292" data-surface="editorSurfaceDC" data-surface-key="surfaceDC"></canvas>
+                <figcaption>D, C -> SE</figcaption>
+              </figure>
+              <figure class="surface-card compact-surface">
+                <canvas id="editorSurfaceFinal" width="420" height="292" data-surface="editorSurfaceFinal" data-surface-key="surfaceFinal"></canvas>
+                <figcaption>SD, SE -> SF</figcaption>
+              </figure>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div class="tab-page" id="components" role="tabpanel">
+        <div class="section-title">
+          <h2>Componentes del sistema</h2>
+          <p>Resumen operativo para interpretar el dashboard y sus limites metodologicos.</p>
+        </div>
+        <div class="component-grid">
+          <article>
+            <h3>Entradas</h3>
+            <ul>
+              <li><strong>W:</strong> anchura media de grieta en mm. Anclada a SICT/IMT.</li>
+              <li><strong>L:</strong> longitud del track en mm. Umbrales iniciales propios.</li>
+              <li><strong>D:</strong> fraccion de pixeles de grieta en la mascara.</li>
+              <li><strong>C:</strong> completitud de observacion; 1 completa, 0 truncada.</li>
+            </ul>
+          </article>
+          <article>
+            <h3>Arquitectura</h3>
+            <ol>
+              <li>FIS 1 combina W y L para obtener SD.</li>
+              <li>FIS 2 combina D y C para obtener SE.</li>
+              <li>FIS 3 combina SD y SE para obtener SF.</li>
+            </ol>
+          </article>
+          <article>
+            <h3>Inferencia</h3>
+            <p>Se usa una variante difusa suavizada con producto algebraico para antecedente y centroide ponderado de consecuentes para defuzzificacion.</p>
+          </article>
+          <article>
+            <h3>Limites</h3>
+            <p>El sistema es preliminar. L, D, C, reglas y recomendaciones requieren sensibilidad, calibracion de campo y criterio experto.</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="tab-page" id="configuration" role="tabpanel">
+        <div class="section-title">
+          <h2>Configuracion base del sistema difuso</h2>
+          <p>Referencia completa de variables, funciones de membresia, reglas, superficies e inferencia usadas por este dashboard.</p>
+        </div>
+        <div class="config-layout">
+          <article class="config-card">
+            <h3>Arquitectura jerarquica</h3>
+            <div id="configArchitecture" class="config-flow"></div>
+          </article>
+          <article class="config-card">
+            <h3>Variables y funciones de membresia</h3>
+            <div id="configVariables" class="config-table"></div>
+          </article>
+          <article class="config-card">
+            <h3>Base de reglas</h3>
+            <div id="configRules" class="config-rules"></div>
+          </article>
+          <article class="config-card">
+            <h3>Superficies 3D disponibles</h3>
+            <div id="configSurfaces" class="config-surface-list"></div>
+          </article>
+          <article class="config-card">
+            <h3>Inferencia y alcance metodologico</h3>
+            <div class="config-notes">
+              <p><strong>Tipo:</strong> sistema Mamdani jerarquico con tres sub-FIS.</p>
+              <p><strong>Antecedente:</strong> producto algebraico. <strong>Defuzzificacion:</strong> centroide ponderado de consecuentes activados.</p>
+              <p><strong>Respaldo:</strong> W conserva anclaje directo en umbrales SICT/IMT; L, D, C, reglas y recomendaciones se tratan como configuracion metodologica inicial pendiente de calibracion experta.</p>
+              <p><strong>Salida operativa:</strong> SF se interpreta con cortes internos preliminares: leve &lt; 35%, moderada 35-70% y critica &gt;= 70%.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="./app.js?v=20260609-editor4"></script>
+</body>
+</html>

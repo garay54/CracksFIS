@@ -1,0 +1,82 @@
+[
+    {
+        "inputs": {
+            "w_anchura_mm": 1.5,
+            "l_longitud_mm": 300.0,
+            "d_densidad": 0.04,
+            "c_completitud": 1.0
+        },
+        "intermediate": {
+            "sd_dimensional": 16.888274267141675,
+            "se_extension": 15.555555555555541
+        },
+        "output": {
+            "sf_final_score": 14.090909090909093,
+            "severity_label": "LEVE"
+        }
+    },
+    {
+        "inputs": {
+            "w_anchura_mm": 6.0,
+            "l_longitud_mm": 800.0,
+            "d_densidad": 0.15,
+            "c_completitud": 0.8
+        },
+        "intermediate": {
+            "sd_dimensional": 50.0,
+            "se_extension": 50.00000000000002
+        },
+        "output": {
+            "sf_final_score": 49.99999999999998,
+            "severity_label": "MODERADA"
+        }
+    },
+    {
+        "inputs": {
+            "w_anchura_mm": 20.0,
+            "l_longitud_mm": 1500.0,
+            "d_densidad": 0.4,
+            "c_completitud": 1.0
+        },
+        "intermediate": {
+            "sd_dimensional": 83.11172573285833,
+            "se_extension": 81.61785430162521
+        },
+        "output": {
+            "sf_final_score": 86.83333333333334,
+            "severity_label": "CR\u00cdTICA"
+        }
+    },
+    {
+        "inputs": {
+            "w_anchura_mm": 2.0,
+            "l_longitud_mm": 400.0,
+            "d_densidad": 0.08,
+            "c_completitud": 0.0
+        },
+        "intermediate": {
+            "sd_dimensional": 18.382145698374835,
+            "se_extension": 50.00000000000002
+        },
+        "output": {
+            "sf_final_score": 14.090909090909092,
+            "severity_label": "LEVE"
+        }
+    },
+    {
+        "inputs": {
+            "w_anchura_mm": 6.0,
+            "l_longitud_mm": 800.0,
+            "d_densidad": 0.04,
+            "c_completitud": 0.0
+        },
+        "intermediate": {
+            "sd_dimensional": 50.0,
+            "se_extension": 50.0
+        },
+        "output": {
+            "sf_final_score": 49.99999999999998,
+            "severity_label": "MODERADA"
+        }
+    }
+]

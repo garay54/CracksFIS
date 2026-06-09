@@ -1,0 +1,926 @@
+:root {
+  color-scheme: light;
+  --bg: #f4f6f8;
+  --panel: #ffffff;
+  --ink: #17212b;
+  --muted: #65717d;
+  --line: #d8dee5;
+  --accent: #0f766e;
+  --accent-2: #b45309;
+  --danger: #b91c1c;
+  --low: #15803d;
+  --mid: #b45309;
+  --high: #b91c1c;
+  --soft: #edf2f7;
+  --shadow: 0 10px 28px rgba(28, 43, 58, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  letter-spacing: 0;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.app-header {
+  min-height: 86px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 18px 28px;
+  background: #111827;
+  color: #ffffff;
+  border-bottom: 4px solid var(--accent);
+}
+
+.eyebrow {
+  margin: 0 0 4px;
+  color: #9fb3c8;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 0;
+  font-size: clamp(1.45rem, 2.5vw, 2.1rem);
+  line-height: 1.15;
+}
+
+h2 {
+  margin-bottom: 4px;
+  font-size: 1.05rem;
+}
+
+h3 {
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+}
+
+.status-strip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 210px;
+  justify-content: flex-end;
+}
+
+.status-pill {
+  display: inline-flex;
+  min-width: 92px;
+  justify-content: center;
+  padding: 7px 12px;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.86rem;
+}
+
+.status-low {
+  background: var(--low);
+}
+
+.status-mid {
+  background: var(--mid);
+}
+
+.status-high {
+  background: var(--high);
+}
+
+#statusScore {
+  font-variant-numeric: tabular-nums;
+  color: #dbeafe;
+  font-weight: 700;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.95fr) minmax(360px, 1.05fr);
+  gap: 18px;
+  padding: 18px;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.control-panel,
+.result-panel,
+.tabs-panel,
+.rule-block,
+.metric,
+.recommendation,
+.component-grid article,
+.config-card,
+figure {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.control-panel,
+.result-panel,
+.tabs-panel {
+  padding: 18px;
+}
+
+.tabs-panel {
+  grid-column: 1 / -1;
+}
+
+.section-title {
+  margin-bottom: 16px;
+}
+
+.section-title p {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.input-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.control-row {
+  display: grid;
+  grid-template-columns: minmax(118px, 0.7fr) minmax(130px, 1fr) 64px;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--soft);
+}
+
+.control-row:last-child {
+  border-bottom: 0;
+}
+
+.control-row span {
+  display: grid;
+  gap: 2px;
+}
+
+.control-row small,
+.metric small {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent);
+}
+
+output {
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  text-align: right;
+}
+
+.preset-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.preset-row button,
+.tab-button,
+.surface-tools button {
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+  border-radius: 6px;
+  min-height: 36px;
+  padding: 0 12px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.preset-row button:hover,
+.tab-button:hover,
+.surface-tools button:hover {
+  border-color: var(--accent);
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.metric {
+  padding: 14px;
+  min-height: 112px;
+}
+
+.metric span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.metric strong {
+  display: block;
+  margin: 10px 0 6px;
+  font-size: clamp(1.45rem, 3vw, 2.1rem);
+  font-variant-numeric: tabular-nums;
+}
+
+.metric.final {
+  border-color: #9fb3c8;
+}
+
+.recommendation {
+  margin-top: 12px;
+  padding: 14px;
+}
+
+.recommendation span {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.recommendation p {
+  margin: 6px 0 0;
+  line-height: 1.45;
+}
+
+.method-note {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 12px;
+}
+
+.tab-button.active {
+  background: #123c4a;
+  color: #ffffff;
+  border-color: #123c4a;
+}
+
+.tab-page {
+  display: none;
+}
+
+.tab-page.active {
+  display: block;
+}
+
+.rule-layout,
+.surface-grid,
+.chart-grid,
+.component-grid,
+.config-layout {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.surface-grid-3d {
+  grid-template-columns: repeat(3, minmax(300px, 1fr));
+}
+
+.chart-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.membership-editor {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 16px;
+  padding: 14px;
+  border: 1px solid #dbe4ec;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.editor-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.editor-header h3 {
+  margin-bottom: 4px;
+}
+
+.editor-header p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.4;
+  font-size: 0.88rem;
+}
+
+.editor-actions {
+  display: flex;
+  align-items: end;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.editor-actions label {
+  display: grid;
+  gap: 4px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.editor-actions select,
+.membership-set-card select,
+.membership-set-card input {
+  min-height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #ffffff;
+  color: var(--ink);
+  padding: 0 9px;
+}
+
+.editor-actions button {
+  min-height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #ffffff;
+  color: var(--ink);
+  cursor: pointer;
+  font-weight: 800;
+  padding: 0 11px;
+}
+
+.editor-actions button:hover {
+  border-color: var(--accent);
+}
+
+.membership-set-controls {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.membership-set-card {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid #e3e9f0;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.set-card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.set-card-title small {
+  margin-left: auto;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.shape-control {
+  display: grid;
+  gap: 5px;
+}
+
+.shape-control span,
+.param-grid span {
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+.param-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.param-grid label {
+  display: grid;
+  gap: 4px;
+}
+
+.param-grid input {
+  width: 100%;
+  font-variant-numeric: tabular-nums;
+}
+
+.fis-editor-layout {
+  display: grid;
+  grid-template-columns: minmax(190px, 0.28fr) minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+}
+
+.fis-editor-sidebar,
+.fis-editor-main {
+  border: 1px solid #dbe4ec;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.fis-editor-sidebar {
+  display: grid;
+  gap: 14px;
+  padding: 14px;
+}
+
+.fis-editor-sidebar h3 {
+  margin-bottom: 8px;
+  color: #475569;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+}
+
+.editor-variable-list {
+  display: grid;
+  gap: 7px;
+}
+
+.editor-variable-list button {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 7px 9px;
+  border: 1px solid #e3e9f0;
+  border-radius: 6px;
+  background: #f8fafc;
+  color: var(--ink);
+  cursor: pointer;
+  text-align: left;
+}
+
+.editor-variable-list button:hover,
+.editor-variable-list button.active {
+  border-color: var(--accent);
+  background: #e6f3f1;
+}
+
+.editor-variable-list strong {
+  font-size: 0.9rem;
+}
+
+.editor-variable-list span {
+  min-width: 0;
+  color: var(--muted);
+  font-size: 0.76rem;
+  line-height: 1.2;
+}
+
+.fis-editor-main {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  overflow: hidden;
+}
+
+.fis-editor-toolbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.fis-editor-toolbar h3 {
+  margin-bottom: 4px;
+}
+
+.fis-editor-toolbar p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
+.mf-editor-canvas {
+  min-height: 220px;
+  cursor: crosshair;
+  touch-action: none;
+}
+
+.mf-editor-canvas.dragging {
+  cursor: grabbing;
+}
+
+.mf-editor-params {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.mf-editor-params article {
+  display: grid;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid #e3e9f0;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.mf-editor-params article.selected {
+  border-color: var(--accent);
+  background: #e6f3f1;
+}
+
+.mf-editor-params button {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 28px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+}
+
+.mf-editor-params label {
+  display: grid;
+  gap: 4px;
+}
+
+.mf-editor-params label span {
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 800;
+}
+
+.mf-editor-params select {
+  min-height: 32px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #ffffff;
+  color: var(--ink);
+  padding: 0 8px;
+}
+
+.mf-editor-params code {
+  color: #334155;
+  font-size: 0.78rem;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.editor-surface-tools {
+  margin: 2px 0 0;
+}
+
+.editor-surface-grid {
+  grid-template-columns: repeat(3, minmax(230px, 1fr));
+}
+
+.compact-surface {
+  padding: 9px;
+  box-shadow: none;
+}
+
+.compact-surface canvas {
+  aspect-ratio: 1.435 / 1;
+}
+
+.component-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.config-layout {
+  grid-template-columns: minmax(280px, 0.9fr) minmax(420px, 1.4fr);
+}
+
+.config-card:nth-child(2),
+.config-card:nth-child(3),
+.config-card:nth-child(5) {
+  grid-column: 1 / -1;
+}
+
+.surface-tools {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: -4px 0 16px;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.surface-tools button {
+  min-height: 34px;
+}
+
+.surface-card canvas {
+  cursor: grab;
+  touch-action: none;
+  aspect-ratio: 1.435 / 1;
+}
+
+.surface-card canvas:active {
+  cursor: grabbing;
+}
+
+.rule-block {
+  padding: 14px;
+  overflow: hidden;
+}
+
+.rule-table {
+  display: grid;
+  gap: 6px;
+}
+
+.rule-row {
+  display: grid;
+  grid-template-columns: 1fr 70px 62px;
+  align-items: center;
+  gap: 8px;
+  min-height: 34px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: #f8fafc;
+  border: 1px solid #e8edf2;
+}
+
+.rule-row.active-rule {
+  background: #e6f3f1;
+  border-color: #8ac6bf;
+}
+
+.rule-row span {
+  min-width: 0;
+  font-size: 0.78rem;
+  line-height: 1.25;
+}
+
+.rule-row strong,
+.rule-row em {
+  font-size: 0.8rem;
+  font-style: normal;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+figure {
+  margin: 0;
+  padding: 12px;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  background: #fbfdff;
+  border: 1px solid #e5eaf0;
+}
+
+figcaption {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.component-grid article {
+  padding: 14px;
+  box-shadow: none;
+}
+
+.config-card {
+  padding: 16px;
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.config-card h3 {
+  margin-bottom: 14px;
+}
+
+.config-flow {
+  display: grid;
+  gap: 10px;
+}
+
+.flow-step {
+  display: grid;
+  gap: 3px;
+  padding: 12px;
+  border: 1px solid #dbe4ec;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.flow-step strong {
+  color: var(--accent);
+  font-size: 0.84rem;
+}
+
+.flow-step span {
+  font-weight: 800;
+}
+
+.flow-step small {
+  color: var(--muted);
+}
+
+.config-table,
+.config-rules {
+  display: grid;
+  gap: 14px;
+}
+
+.variable-config,
+.rules-config-group {
+  border: 1px solid #e3e9f0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fbfdff;
+}
+
+.variable-config > div,
+.rules-config-group h4 {
+  margin: 0;
+  padding: 12px;
+  background: #f4f7fa;
+  border-bottom: 1px solid #e3e9f0;
+}
+
+.variable-config h4,
+.rules-config-group h4 {
+  font-size: 0.92rem;
+}
+
+.variable-config p {
+  margin: 5px 0 0;
+  color: #475569;
+  line-height: 1.4;
+  font-size: 0.86rem;
+}
+
+.config-card table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.config-card th,
+.config-card td {
+  padding: 9px 10px;
+  border-bottom: 1px solid #edf2f7;
+  text-align: left;
+  vertical-align: top;
+  font-size: 0.84rem;
+}
+
+.config-card th {
+  color: #475569;
+  background: #ffffff;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+}
+
+.swatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 8px;
+  border-radius: 50%;
+  vertical-align: -1px;
+}
+
+.config-surface-list,
+.config-notes {
+  display: grid;
+  gap: 10px;
+}
+
+.surface-config-row {
+  display: grid;
+  gap: 4px;
+  padding: 11px 12px;
+  border: 1px solid #e3e9f0;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.surface-config-row span,
+.config-notes p {
+  margin: 0;
+  color: #334155;
+  line-height: 1.45;
+  font-size: 0.9rem;
+}
+
+.component-grid ul,
+.component-grid ol {
+  margin: 0;
+  padding-left: 20px;
+  color: #334155;
+  line-height: 1.45;
+}
+
+.component-grid p {
+  margin-bottom: 0;
+  color: #334155;
+  line-height: 1.45;
+}
+
+@media (max-width: 1050px) {
+  .workspace,
+  .rule-layout,
+  .surface-grid,
+  .chart-grid,
+  .component-grid,
+  .membership-set-controls,
+  .fis-editor-layout,
+  .mf-editor-params,
+  .editor-surface-grid,
+  .config-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .tabs-panel {
+    grid-column: auto;
+  }
+
+  .config-card:nth-child(2),
+  .config-card:nth-child(3),
+  .config-card:nth-child(5) {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 680px) {
+  .app-header {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 16px;
+  }
+
+  .workspace {
+    padding: 12px;
+  }
+
+  .control-row {
+    grid-template-columns: 1fr 64px;
+  }
+
+  .control-row input {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .metric-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .editor-header {
+    display: grid;
+  }
+
+  .editor-actions {
+    justify-content: stretch;
+  }
+
+  .editor-actions label,
+  .editor-actions button {
+    width: 100%;
+  }
+
+  .fis-editor-toolbar {
+    display: grid;
+  }
+}

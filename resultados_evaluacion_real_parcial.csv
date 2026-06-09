@@ -1,0 +1,11 @@
+track_id,estado_tracking,toca_sup,toca_inf,C_difusa,W_mm,L_mm,D_densidad,SD_porc,SE_porc,SF_porc,nivel_severidad,recomendacion
+2,COMPLETA,False,False,1.0,0.0,0.0,0.0,15.56,15.56,14.09,LEVE,MONITOREO PERIÓDICO / Sellado menor localizado en caso de desarrollo puntual.
+1,TRUNCADA_INICIO,True,False,0.5,0.0,0.0,0.0,15.56,15.56,14.09,LEVE,MONITOREO PERIÓDICO / Sellado menor localizado en caso de desarrollo puntual.
+4,TRUNCADA_INICIO,True,False,0.5,0.0,0.0,0.0,15.56,15.56,14.09,LEVE,MONITOREO PERIÓDICO / Sellado menor localizado en caso de desarrollo puntual.
+3,COMPLETA,False,False,1.0,0.0,0.0,0.0,15.56,15.56,14.09,LEVE,MONITOREO PERIÓDICO / Sellado menor localizado en caso de desarrollo puntual.
+5,COMPLETA,False,True,0.5,0.0,0.0,0.0,15.56,15.56,14.09,LEVE,MONITOREO PERIÓDICO / Sellado menor localizado en caso de desarrollo puntual.
+11,COMPLETA,False,False,1.0,0.0,0.0,0.0,15.56,15.56,14.09,LEVE,MONITOREO PERIÓDICO / Sellado menor localizado en caso de desarrollo puntual.
+14,TRUNCADA_INICIO,True,True,0.0,0.0,0.0,0.0,15.56,50.0,14.09,LEVE,MONITOREO PERIÓDICO / Sellado menor localizado en caso de desarrollo puntual.
+15,TRUNCADA_INICIO,True,False,0.5,0.0,0.0,0.0,15.56,15.56,14.09,LEVE,MONITOREO PERIÓDICO / Sellado menor localizado en caso de desarrollo puntual.
+18,COMPLETA,False,False,1.0,0.0,0.0,0.0,15.56,15.56,14.09,LEVE,MONITOREO PERIÓDICO / Sellado menor localizado en caso de desarrollo puntual.
+10,TRUNCADA_INICIO,True,False,0.5,0.0,0.0,0.0,15.56,15.56,14.09,LEVE,MONITOREO PERIÓDICO / Sellado menor localizado en caso de desarrollo puntual.
